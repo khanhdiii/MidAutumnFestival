@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đêm Hội Trăng Rằm - Trung Thu 2026 🌕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Dancing+Script:wght@700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============ INTRO: MOONCAKE OPENING ============ -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-glow"></div>
+        <div class="mooncake-container" id="mooncakeContainer">
+            <!-- Top half of mooncake -->
+            <div class="mooncake-top" id="mooncakeTop">
+                <div class="mooncake-surface">
+                    <div class="mooncake-pattern">
+                        <div class="pattern-circle"></div>
+                        <div class="pattern-text">中秋</div>
+                        <div class="pattern-border"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom half of mooncake -->
+            <div class="mooncake-bottom" id="mooncakeBottom">
+                <div class="mooncake-surface">
+                    <div class="mooncake-filling"></div>
+                </div>
+            </div>
+            <!-- Yolk / golden center revealed -->
+            <div class="mooncake-yolk" id="mooncakeYolk">
+                <span class="yolk-emoji">🌕</span>
+            </div>
+        </div>
+        <h2 class="intro-title" id="introTitle">Trung Thu Viên Mãn</h2>
+        <p class="intro-subtitle" id="introSubtitle">Chạm để mở bánh trung thu...</p>
+    </div>
+
+    <!-- ============ MAIN SCENE ============ -->
+    <div class="main-scene" id="mainScene">
+
+        <!-- LAYER 1: Sky & Stars Canvas -->
+        <canvas id="skyCanvas" class="layer"></canvas>
+
+        <!-- LAYER 2: Moon & Clouds -->
+        <div class="layer moon-layer">
+            <div class="glow-ring"></div>
+            <div class="moon">
+                <div class="crater c1"></div>
+                <div class="crater c2"></div>
+                <div class="crater c3"></div>
+                <div class="crater c4"></div>
+            </div>
+            <!-- Co Hang floating near moon -->
+            <div class="co-hang-wrapper" id="coHangWrapper">
+                <img src="img/co hang.png" alt="Cô Hằng" class="co-hang-img" />
+            </div>
+            <!-- Clouds -->
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+
+        <!-- LAYER 3: Moon-surface ground, Tree, Rabbit -->
+        <div class="layer scenery-layer">
+            <!-- Moon surface ground -->
+            <div class="moon-ground">
+                <div class="moon-ground-crater mc1"></div>
+                <div class="moon-ground-crater mc2"></div>
+                <div class="moon-ground-crater mc3"></div>
+                <div class="moon-ground-crater mc4"></div>
+                <div class="moon-ground-crater mc5"></div>
+                <div class="moon-ground-crater mc6"></div>
+                <div class="moon-ground-crater mc7"></div>
+            </div>
+
+            <!-- Tree (real image) -->
+            <div class="tree-wrapper">
+                <img src="img/cay.png" alt="Cây" class="tree-img" />
+                <div class="tree-glow"></div>
+            </div>
+
+            <!-- Rabbit (SVG cute white rabbit) -->
+            <div class="rabbit-wrapper" id="rabbitWrapper">
+                <svg class="rabbit-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Fur gradient -->
+                        <radialGradient id="furMain" cx="40%" cy="35%" r="65%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="60%" stop-color="#f8f4f0"/>
+                            <stop offset="100%" stop-color="#e8e0d8"/>
+                        </radialGradient>
+                        <!-- Ear pink gradient -->
+                        <linearGradient id="earPink" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffc1cc"/>
+                            <stop offset="100%" stop-color="#ff8fa3"/>
+                        </linearGradient>
+                        <!-- Eye sparkle -->
+                        <radialGradient id="eyeGrad" cx="40%" cy="35%" r="55%">
+                            <stop offset="0%" stop-color="#4a3728"/>
+                            <stop offset="70%" stop-color="#1a0e08"/>
+                            <stop offset="100%" stop-color="#0d0604"/>
+                        </radialGradient>
+                        <!-- Mooncake gradient -->
+                        <radialGradient id="mooncakeGrad" cx="40%" cy="35%" r="60%">
+                            <stop offset="0%" stop-color="#f0c060"/>
+                            <stop offset="50%" stop-color="#d4a043"/>
+                            <stop offset="100%" stop-color="#b8860b"/>
+                        </radialGradient>
+                        <!-- Soft shadow filter -->
+                        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
+                        </filter>
+                        <!-- Glow filter -->
+                        <filter id="blushGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <!-- Sparkle filter for eyes -->
+                        <filter id="sparkle">
+                            <feGaussianBlur stdDeviation="1.5" result="glow"/>
+                            <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+
+                    <g filter="url(#softShadow)">
+                        <!-- === LEFT EAR (tall, upright) === -->
+                        <ellipse cx="100" cy="55" rx="22" ry="72" fill="url(#furMain)" transform="rotate(-10, 100, 55)"/>
+                        <ellipse cx="100" cy="55" rx="13" ry="55" fill="url(#earPink)" opacity="0.7" transform="rotate(-10, 100, 55)"/>
+                        <!-- Ear inner highlight -->
+                        <ellipse cx="98" cy="40" rx="5" ry="25" fill="rgba(255,255,255,0.4)" transform="rotate(-10, 100, 55)"/>
+
+                        <!-- === RIGHT EAR (slightly tilted/floppy) === -->
+                        <ellipse cx="165" cy="60" rx="22" ry="68" fill="url(#furMain)" transform="rotate(18, 165, 60)"/>
+                        <ellipse cx="165" cy="60" rx="13" ry="52" fill="url(#earPink)" opacity="0.7" transform="rotate(18, 165, 60)"/>
+                        <ellipse cx="163" cy="48" rx="5" ry="23" fill="rgba(255,255,255,0.4)" transform="rotate(18, 165, 60)"/>
+
+                        <!-- === HEAD === -->
+                        <ellipse cx="130" cy="150" rx="58" ry="52" fill="url(#furMain)"/>
+                        <!-- Head highlight -->
+                        <ellipse cx="120" cy="135" rx="30" ry="25" fill="rgba(255,255,255,0.5)"/>
+
+                        <!-- === BODY === -->
+                        <ellipse cx="130" cy="240" rx="62" ry="65" fill="url(#furMain)"/>
+                        <!-- Belly highlight -->
+                        <ellipse cx="130" cy="235" rx="40" ry="45" fill="rgba(255,255,255,0.6)"/>
+
+                        <!-- === FLUFFY TAIL === -->
+                        <circle cx="68" cy="255" r="22" fill="url(#furMain)"/>
+                        <circle cx="68" cy="253" r="14" fill="rgba(255,255,255,0.6)"/>
+                        <!-- Tail fluff detail -->
+                        <circle cx="60" cy="248" r="6" fill="rgba(255,255,255,0.5)"/>
+                        <circle cx="75" cy="247" r="5" fill="rgba(255,255,255,0.4)"/>
+
+                        <!-- === FEET === -->
+                        <ellipse cx="105" cy="298" rx="25" ry="12" fill="url(#furMain)"/>
+                        <ellipse cx="160" cy="298" rx="25" ry="12" fill="url(#furMain)"/>
+                        <!-- Toe pads -->
+                        <ellipse cx="95" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+                        <ellipse cx="105" cy="294" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+                        <ellipse cx="115" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+                        <ellipse cx="150" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+                        <ellipse cx="160" cy="294" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+                        <ellipse cx="170" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
+
+                        <!-- === ARMS (holding mooncake) === -->
+                        <!-- Left arm -->
+                        <path d="M 90,200 C 70,195 55,188 50,180 C 48,176 52,172 58,175 C 65,178 75,185 85,195 Z" fill="url(#furMain)"/>
+                        <!-- Right arm -->
+                        <path d="M 170,200 C 190,195 205,188 210,180 C 212,176 208,172 202,175 C 195,178 185,185 175,195 Z" fill="url(#furMain)"/>
+
+                        <!-- === MOONCAKE (held by rabbit) === -->
+                        <g>
+                            <ellipse cx="130" cy="192" rx="30" ry="18" fill="url(#mooncakeGrad)"/>
+                            <!-- Mooncake pattern -->
+                            <ellipse cx="130" cy="190" rx="18" ry="10" fill="none" stroke="rgba(139,69,19,0.35)" stroke-width="1.2"/>
+                            <circle cx="130" cy="189" r="6" fill="none" stroke="rgba(139,69,19,0.3)" stroke-width="1"/>
+                            <!-- Mooncake shine -->
+                            <ellipse cx="122" cy="186" rx="8" ry="5" fill="rgba(255,255,255,0.25)"/>
+                        </g>
+
+                        <!-- === LITTLE PAWS on mooncake === -->
+                        <ellipse cx="108" cy="185" rx="10" ry="8" fill="url(#furMain)"/>
+                        <ellipse cx="152" cy="185" rx="10" ry="8" fill="url(#furMain)"/>
+                        <!-- Paw pads -->
+                        <circle cx="105" cy="183" r="2.5" fill="#ffc1cc" opacity="0.6"/>
+                        <circle cx="111" cy="182" r="2" fill="#ffc1cc" opacity="0.5"/>
+                        <circle cx="149" cy="183" r="2.5" fill="#ffc1cc" opacity="0.6"/>
+                        <circle cx="155" cy="182" r="2" fill="#ffc1cc" opacity="0.5"/>
+
+                        <!-- === EYES (big, sparkly anime-style) === -->
+                        <!-- Left eye white -->
+                        <ellipse cx="112" cy="145" rx="14" ry="16" fill="white"/>
+                        <!-- Left eye iris -->
+                        <ellipse cx="114" cy="147" rx="10" ry="12" fill="url(#eyeGrad)"/>
+                        <!-- Left eye sparkles -->
+                        <g filter="url(#sparkle)">
+                            <circle cx="109" cy="141" r="4" fill="white"/>
+                            <circle cx="118" cy="149" r="2.2" fill="white"/>
+                            <circle cx="111" cy="153" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                        </g>
+
+                        <!-- Right eye white -->
+                        <ellipse cx="152" cy="145" rx="14" ry="16" fill="white"/>
+                        <!-- Right eye iris -->
+                        <ellipse cx="154" cy="147" rx="10" ry="12" fill="url(#eyeGrad)"/>
+                        <!-- Right eye sparkles -->
+                        <g filter="url(#sparkle)">
+                            <circle cx="149" cy="141" r="4" fill="white"/>
+                            <circle cx="158" cy="149" r="2.2" fill="white"/>
+                            <circle cx="151" cy="153" r="1.5" fill="rgba(255,255,255,0.7)"/>
+                        </g>
+
+                        <!-- Eyebrow curves (subtle) -->
+                        <path d="M 100,130 Q 112,124 124,130" stroke="rgba(180,160,140,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 140,130 Q 152,124 164,130" stroke="rgba(180,160,140,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+                        <!-- === CHEEKS (rosy blush) === -->
+                        <g filter="url(#blushGlow)">
+                            <ellipse cx="92" cy="160" rx="14" ry="8" fill="#ff8fa3" opacity="0.35"/>
+                            <ellipse cx="172" cy="160" rx="14" ry="8" fill="#ff8fa3" opacity="0.35"/>
+                        </g>
+
+                        <!-- === NOSE === -->
+                        <ellipse cx="132" cy="157" rx="5" ry="3.5" fill="#ff8fa3"/>
+                        <!-- Nose highlight -->
+                        <ellipse cx="131" cy="156" rx="2" ry="1.5" fill="rgba(255,255,255,0.5)"/>
+
+                        <!-- === MOUTH (cute smile) === -->
+                        <path d="M 122,163 Q 127,170 132,163" stroke="#e0788a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M 132,163 Q 137,170 142,163" stroke="#e0788a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                        <!-- === WHISKERS === -->
+                        <line x1="80" y1="153" x2="96" y2="157" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="78" y1="162" x2="95" y2="162" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="80" y1="170" x2="96" y2="167" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="168" y1="157" x2="184" y2="153" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="169" y1="162" x2="186" y2="162" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="168" y1="167" x2="184" y2="170" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
+
+                        <!-- === FOREHEAD TUFT (fluffy fur) === -->
+                        <path d="M 115,105 Q 120,95 130,100 Q 135,92 142,100 Q 148,95 150,105" fill="url(#furMain)"/>
+                    </g>
+
+                    <!-- === FLOATING SPARKLES around rabbit === -->
+                    <g class="rabbit-sparkles">
+                        <circle cx="60" cy="130" r="2" fill="#ffd700" opacity="0.8">
+                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="210" cy="140" r="1.8" fill="#ffd700" opacity="0.6">
+                            <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="1.8;2.8;1.8" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="45" cy="200" r="1.5" fill="#ffb347" opacity="0.7">
+                            <animate attributeName="opacity" values="0.7;0.15;0.7" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="220" cy="220" r="2" fill="#ffb347" opacity="0.5">
+                            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.8s" repeatCount="indefinite"/>
+                        </circle>
+                        <!-- Star sparkles -->
+                        <text x="50" y="170" font-size="10" fill="#ffd700" opacity="0.6">✦
+                            <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+                        </text>
+                        <text x="215" y="180" font-size="8" fill="#ffd700" opacity="0.5">✦
+                            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite"/>
+                        </text>
+                    </g>
+                </svg>
+                <div class="rabbit-shadow"></div>
+            </div>
+        </div>
+
+        <!-- LAYER 4: Foreground Particles -->
+        <canvas id="particleCanvas" class="layer"></canvas>
+
+        <!-- LAYER 5: Lanterns (golden-orange only) -->
+        <div class="layer lantern-layer" id="lanternsContainer">
+            <!-- Lanterns injected by JS -->
+        </div>
+
+        <!-- LAYER 6: UI -->
+        <div class="layer ui-layer">
+            <header class="glass-header">
+                <div class="brand">
+                    <div class="brand-icon">🌕</div>
+                    <div class="brand-text">
+                        <h1>Trung Thu Viên Mãn</h1>
+                        <p>2026 Premium Edition</p>
+                    </div>
+                </div>
+                <button id="bgmBtn" class="premium-btn">
+                    <span class="icon">🎵</span>
+                    <span class="text">Bật Nhạc</span>
+                </button>
+            </header>
+
+            <footer class="glass-footer">
+                <p>✨ Chạm vào lồng đèn để nhận lời chúc ✨</p>
+            </footer>
+        </div>
+
+        <!-- Wish Modal with image inside -->
+        <div class="modal-overlay" id="wishModal">
+            <div class="modal-container">
+                <div class="modal-card">
+                    <button class="close-btn" id="closeBtn">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <!-- Image on top -->
+                    <div class="modal-image-wrapper" id="modalImageWrapper">
+                        <img id="modalImage" src="" alt="" class="modal-image" />
+                    </div>
+                    <div class="envelope-body">
+                        <div class="ornament-divider">
+                            <span>✦</span><span>✦</span><span>✦</span>
+                        </div>
+                        <div class="letter-content" id="modalMessage">
+                            Đang mở thư...
+                        </div>
+                        <button class="action-btn" id="acceptBtn">
+                            🏮 Đón Nhận Lời Chúc
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
