@@ -697,6 +697,9 @@ letterBackBtn.addEventListener('click', () => {
 const AC = window.AudioContext || window.webkitAudioContext;
 let audioCtx, isPlaying = false, bgInterval;
 
+const bgAudio = new Audio('audio/bgm.mp3');
+bgAudio.loop = true;
+
 function initAudio() {
     if (!audioCtx) audioCtx = new AC();
 }
@@ -726,18 +729,14 @@ document.getElementById('bgmBtn').addEventListener('click', () => {
     const btnIco = document.querySelector('#bgmBtn .icon');
 
     if (isPlaying) {
-        clearInterval(bgInterval);
+        bgAudio.pause();
         isPlaying = false;
         btnIco.textContent = '🎵';
         btnTxt.textContent = 'Bật Nhạc';
     } else {
+        bgAudio.play().catch(e => console.log('Audio play failed:', e));
         isPlaying = true;
         btnIco.textContent = '🔇';
         btnTxt.textContent = 'Tắt Nhạc';
-        const penta = [261.63, 293.66, 329.63, 392, 440, 523.25];
-        bgInterval = setInterval(() => {
-            playNote(penta[Math.floor(Math.random()*penta.length)], 2.6);
-            if (Math.random() < .22) playNote(130.81, 4, 'sine', .028);
-        }, 820);
     }
 });
