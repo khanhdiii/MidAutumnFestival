@@ -9,327 +9,470 @@
 </head>
 <body>
 
-    <!-- ============ INTRO: MOONCAKE OPENING ============ -->
-    <div class="intro-screen" id="introScreen">
-        <div class="intro-glow"></div>
-        <div class="mooncake-container" id="mooncakeContainer">
-            <!-- Top half of mooncake -->
-            <div class="mooncake-top" id="mooncakeTop">
-                <div class="mooncake-surface">
-                    <div class="mooncake-pattern">
-                        <div class="pattern-circle"></div>
-                        <div class="pattern-text">中秋</div>
-                        <div class="pattern-border"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- Bottom half of mooncake -->
-            <div class="mooncake-bottom" id="mooncakeBottom">
-                <div class="mooncake-surface">
-                    <div class="mooncake-filling"></div>
-                </div>
-            </div>
-            <!-- Yolk / golden center revealed -->
-            <div class="mooncake-yolk" id="mooncakeYolk">
-                <span class="yolk-emoji">🌕</span>
+<!-- ══════════════════════════════════════════
+     INTRO: BÁNH TRUNG THU THẬP CẨM
+══════════════════════════════════════════ -->
+<div class="intro-screen" id="introScreen">
+    <div class="intro-stars" id="introStars"></div>
+    <div class="intro-glow-aura"></div>
+
+    <!-- Mooncake Top-Down -->
+    <div class="mc-wrapper" id="mcWrapper">
+        <!-- Đĩa lót (Top-down) -->
+        <div class="mc-plate"></div>
+
+        <!-- Bánh SVG (Lid) -->
+        <div class="mc-lid" id="mcLid">
+            <svg class="mc-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="cakeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fadd9e"/>
+                        <stop offset="60%" stop-color="#d68f27"/>
+                        <stop offset="90%" stop-color="#a35212"/>
+                        <stop offset="100%" stop-color="#6e3108"/>
+                    </radialGradient>
+                    <radialGradient id="cakeCenter" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffeab0"/>
+                        <stop offset="40%" stop-color="#e8a838"/>
+                        <stop offset="100%" stop-color="#c26815"/>
+                    </radialGradient>
+                    <filter id="cakeDrop">
+                        <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000" flood-opacity="0.6"/>
+                    </filter>
+                    <filter id="innerShadow">
+                        <feComponentTransfer in="SourceAlpha">
+                          <feFuncA type="linear" slope="0.6"/>
+                        </feComponentTransfer>
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feOffset dx="0" dy="0"/>
+                        <feComposite operator="in" in2="SourceAlpha"/>
+                        <feComposite operator="arithmetic" k2="-1" k3="1" result="shadowDiff"/>
+                        <feFlood flood-color="#4a1800" flood-opacity="0.9"/>
+                        <feComposite operator="in" in2="shadowDiff"/>
+                        <feComposite operator="over" in2="SourceGraphic"/>
+                    </filter>
+                    <radialGradient id="highlightGrad" cx="35%" cy="30%" r="65%">
+                        <stop offset="0%" stop-color="#fff" stop-opacity="0.35"/>
+                        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <g filter="url(#cakeDrop)">
+                    <!-- Scalloped edges (12 petals) -->
+                    <path d="M100,6 
+                             C115,6 125,13 130,23 
+                             C145,19 158,26 162,39 
+                             C176,41 185,53 182,66 
+                             C195,73 198,89 190,101 
+                             C198,113 195,129 182,136 
+                             C185,149 176,161 162,163 
+                             C158,176 145,183 130,179 
+                             C125,189 115,196 100,196 
+                             C85,196 75,189 70,179 
+                             C55,183 42,176 38,163 
+                             C24,161 15,149 18,136 
+                             C5,129 2,113 10,101 
+                             C2,89 5,73 18,66 
+                             C15,53 24,41 38,39 
+                             C42,26 55,19 70,23 
+                             C75,13 85,6 100,6 Z" 
+                          fill="url(#cakeGlow)" stroke="#5c2403" stroke-width="2" filter="url(#innerShadow)"/>
+                    
+                    <!-- Inner rings -->
+                    <circle cx="100" cy="101" r="76" fill="none" stroke="#7a3605" stroke-width="2" opacity="0.7"/>
+                    <circle cx="100" cy="101" r="70" fill="none" stroke="#8c3e05" stroke-width="1.5" stroke-dasharray="4,5"/>
+                    
+                    <!-- Lotus petals inside -->
+                    <g transform="translate(100,101)">
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(45)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(90)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(135)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(180)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(225)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(270)"/>
+                        <path d="M0,-24 C18,-45 18,-62 0,-68 C-18,-62 -18,-45 0,-24 Z" fill="url(#cakeCenter)" stroke="#8f430c" stroke-width="1.2" transform="rotate(315)"/>
+                    </g>
+                    
+                    <!-- Center Seal -->
+                    <circle cx="100" cy="101" r="34" fill="url(#cakeGlow)" stroke="#7d3b0c" stroke-width="2"/>
+                    <text x="100" y="110" text-anchor="middle" font-family="'Cinzel', serif" font-size="24" font-weight="bold" fill="#522000" style="text-shadow: 0 1px 2px rgba(255,255,255,0.4);">中秋</text>
+                    
+                    <!-- Highlight for 3D effect -->
+                    <circle cx="100" cy="101" r="95" fill="url(#highlightGrad)" pointer-events="none"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Nhân bánh hiện ra -->
+        <div class="mc-filling-reveal" id="mcFillingReveal">
+            <div class="mc-yolk">
+                <div class="mc-yolk-core">🌕</div>
+                <div class="mc-yolk-glow r1"></div>
+                <div class="mc-yolk-glow r2"></div>
+                <div class="mc-yolk-glow r3"></div>
             </div>
         </div>
-        <h2 class="intro-title" id="introTitle">Trung Thu Viên Mãn</h2>
-        <p class="intro-subtitle" id="introSubtitle">Chạm để mở bánh trung thu...</p>
+
+        <!-- Bụi vàng -->
+        <div class="mc-dust" id="mcDust"></div>
     </div>
 
-    <!-- ============ MAIN SCENE ============ -->
-    <div class="main-scene" id="mainScene">
+    <h2 class="intro-title" id="introTitle">Trung Thu cùng Đặng Mỹ Hạnh✨</h2>
+    <p class="intro-hint" id="introHint">✦ Chạm để mở bánh trung thu ✦</p>
+</div>
 
-        <!-- LAYER 1: Sky & Stars Canvas -->
-        <canvas id="skyCanvas" class="layer"></canvas>
 
-        <!-- LAYER 2: Moon & Clouds -->
-        <div class="layer moon-layer">
-            <div class="glow-ring"></div>
-            <div class="moon">
-                <div class="crater c1"></div>
-                <div class="crater c2"></div>
-                <div class="crater c3"></div>
-                <div class="crater c4"></div>
-            </div>
-            <!-- Co Hang floating near moon -->
-            <div class="co-hang-wrapper" id="coHangWrapper">
-                <img src="img/co hang.png" alt="Cô Hằng" class="co-hang-img" />
-            </div>
-            <!-- Clouds -->
-            <div class="cloud cloud-1"></div>
-            <div class="cloud cloud-2"></div>
-            <div class="cloud cloud-3"></div>
+<!-- ══════════════════════════════════════════
+     MAIN SCENE
+══════════════════════════════════════════ -->
+<div class="main-scene" id="mainScene">
+
+    <!-- Sky canvas -->
+    <canvas id="skyCanvas" class="layer"></canvas>
+
+    <!-- Moon layer -->
+    <div class="layer moon-layer">
+        <div class="moon-halo"></div>
+        <div class="moon-halo2"></div>
+        <div class="moon">
+            <div class="moon-crater c1"></div>
+            <div class="moon-crater c2"></div>
+            <div class="moon-crater c3"></div>
+            <div class="moon-crater c4"></div>
+            <div class="moon-highlight"></div>
+        </div>
+        <div class="co-hang-wrap">
+            <img src="img/co hang.png" alt="Cô Hằng" class="co-hang-img"/>
+        </div>
+        <div class="cloud cl1"></div>
+        <div class="cloud cl2"></div>
+        <div class="cloud cl3"></div>
+    </div>
+
+    <!-- Ground + Tree + Rabbit -->
+    <div class="layer scenery-layer">
+        <div class="moon-ground">
+            <div class="ground-crater gc1"></div>
+            <div class="ground-crater gc2"></div>
+            <div class="ground-crater gc3"></div>
+            <div class="ground-crater gc4"></div>
+            <div class="ground-crater gc5"></div>
+        </div>
+        <div class="tree-wrap">
+            <img src="img/cay2.png" alt="Cây" class="tree-img"/>
+            <div class="tree-glow"></div>
         </div>
 
-        <!-- LAYER 3: Moon-surface ground, Tree, Rabbit -->
-        <div class="layer scenery-layer">
-            <!-- Moon surface ground -->
-            <div class="moon-ground">
-                <div class="moon-ground-crater mc1"></div>
-                <div class="moon-ground-crater mc2"></div>
-                <div class="moon-ground-crater mc3"></div>
-                <div class="moon-ground-crater mc4"></div>
-                <div class="moon-ground-crater mc5"></div>
-                <div class="moon-ground-crater mc6"></div>
-                <div class="moon-ground-crater mc7"></div>
-            </div>
+        <!-- ── THỎ DỄ THƯƠNG ── -->
+        <div class="rabbit-wrap" id="rabbitWrap">
+            <svg class="rabbit-svg" viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="rFur" cx="40%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#fff9f6"/>
+                        <stop offset="55%" stop-color="#f5ede8"/>
+                        <stop offset="100%" stop-color="#e8d8d0"/>
+                    </radialGradient>
+                    <radialGradient id="rFurDark" cx="40%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#f0e4de"/>
+                        <stop offset="100%" stop-color="#d8c8be"/>
+                    </radialGradient>
+                    <linearGradient id="rEar" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffccd8"/>
+                        <stop offset="100%" stop-color="#ff99b3"/>
+                    </linearGradient>
+                    <radialGradient id="rEye" cx="35%" cy="30%" r="60%">
+                        <stop offset="0%" stop-color="#3d2010"/>
+                        <stop offset="80%" stop-color="#120500"/>
+                    </radialGradient>
+                    <radialGradient id="rCake" cx="38%" cy="30%" r="65%">
+                        <stop offset="0%" stop-color="#f5d070"/>
+                        <stop offset="50%" stop-color="#d4a035"/>
+                        <stop offset="100%" stop-color="#a07010"/>
+                    </radialGradient>
+                    <radialGradient id="rNose" cx="40%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#ffb3c6"/>
+                        <stop offset="100%" stop-color="#ff7aa2"/>
+                    </radialGradient>
+                    <filter id="rShadow">
+                        <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+                    </filter>
+                    <filter id="rBlush">
+                        <feGaussianBlur stdDeviation="4"/>
+                    </filter>
+                    <filter id="rGlow">
+                        <feGaussianBlur stdDeviation="2" result="g"/>
+                        <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <!-- Ánh sáng mắt -->
+                    <radialGradient id="rPupil" cx="35%" cy="30%" r="55%">
+                        <stop offset="0%" stop-color="#6b4020"/>
+                        <stop offset="60%" stop-color="#1a0800"/>
+                    </radialGradient>
+                </defs>
 
-            <!-- Tree (real image) -->
-            <div class="tree-wrapper">
-                <img src="img/cay.png" alt="Cây" class="tree-img" />
-                <div class="tree-glow"></div>
-            </div>
+                <g filter="url(#rShadow)">
+                    <!-- ── TAI TRÁI (thẳng) ── -->
+                    <ellipse cx="82" cy="52" rx="18" ry="60" fill="url(#rFur)" transform="rotate(-8,82,52)"/>
+                    <ellipse cx="82" cy="52" rx="10" ry="46" fill="url(#rEar)" opacity="0.75" transform="rotate(-8,82,52)"/>
+                    <ellipse cx="80" cy="38" rx="4" ry="20" fill="rgba(255,255,255,0.45)" transform="rotate(-8,82,52)"/>
+                    <!-- Đỉnh tai chấm tròn -->
+                    <circle cx="78" cy="4" r="6" fill="url(#rFur)" transform="rotate(-8,82,52) translate(4,-5)"/>
 
-            <!-- Rabbit (SVG cute white rabbit) -->
-            <div class="rabbit-wrapper" id="rabbitWrapper">
-                <svg class="rabbit-svg" viewBox="0 0 260 320" xmlns="http://www.w3.org/2000/svg">
+                    <!-- ── TAI PHẢI (cụp nhẹ) ── -->
+                    <ellipse cx="143" cy="58" rx="18" ry="58" fill="url(#rFur)" transform="rotate(15,143,58)"/>
+                    <ellipse cx="143" cy="58" rx="10" ry="44" fill="url(#rEar)" opacity="0.75" transform="rotate(15,143,58)"/>
+                    <ellipse cx="141" cy="44" rx="4" ry="18" fill="rgba(255,255,255,0.4)" transform="rotate(15,143,58)"/>
+
+                    <!-- ── ĐẦU ── -->
+                    <ellipse cx="110" cy="128" rx="52" ry="48" fill="url(#rFur)"/>
+                    <!-- Lông mềm đỉnh đầu -->
+                    <ellipse cx="100" cy="92" rx="26" ry="20" fill="url(#rFur)"/>
+                    <!-- Mảng sáng trán -->
+                    <ellipse cx="98" cy="110" rx="28" ry="22" fill="rgba(255,255,255,0.55)"/>
+
+                    <!-- ── THÂN ── -->
+                    <ellipse cx="110" cy="215" rx="56" ry="60" fill="url(#rFur)"/>
+                    <!-- Bụng trắng mềm -->
+                    <ellipse cx="110" cy="212" rx="36" ry="44" fill="rgba(255,255,255,0.65)"/>
+
+                    <!-- ── ĐUÔI BÔNG ── -->
+                    <circle cx="62" cy="232" r="20" fill="url(#rFur)"/>
+                    <circle cx="62" cy="230" r="13" fill="rgba(255,255,255,0.7)"/>
+                    <circle cx="57" cy="225" r="6" fill="rgba(255,255,255,0.5)"/>
+                    <circle cx="70" cy="224" r="5" fill="rgba(255,255,255,0.4)"/>
+
+                    <!-- ── BÀN CHÂN ── -->
+                    <ellipse cx="88" cy="268" rx="22" ry="10" fill="url(#rFurDark)"/>
+                    <ellipse cx="135" cy="268" rx="22" ry="10" fill="url(#rFurDark)"/>
+                    <!-- Ngón chân -->
+                    <ellipse cx="78" cy="266" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+                    <ellipse cx="88" cy="264" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+                    <ellipse cx="98" cy="266" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+                    <ellipse cx="125" cy="266" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+                    <ellipse cx="135" cy="264" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+                    <ellipse cx="145" cy="266" rx="5" ry="3.5" fill="#ffccd8" opacity="0.6"/>
+
+                    <!-- ── TAY (cầm bánh) ── -->
+                    <path d="M 72,190 C 52,182 40,172 38,162 C 36,157 42,153 49,158 C 57,163 67,175 77,188 Z" fill="url(#rFur)"/>
+                    <path d="M 148,190 C 168,182 180,172 182,162 C 184,157 178,153 171,158 C 163,163 153,175 143,188 Z" fill="url(#rFur)"/>
+
+                    <!-- ── BÁNH TRUNG THU (cầm) ── -->
+                    <!-- Đế bánh -->
+                    <rect x="85" y="172" width="50" height="8" rx="3" fill="#9a7010" opacity="0.5"/>
+                    <!-- Thân bánh -->
+                    <ellipse cx="110" cy="168" rx="28" ry="16" fill="url(#rCake)"/>
+                    <!-- Hoa văn trên bánh -->
+                    <ellipse cx="110" cy="166" rx="17" ry="9" fill="none" stroke="rgba(100,60,0,0.3)" stroke-width="1.2"/>
+                    <circle cx="110" cy="165" r="6" fill="none" stroke="rgba(100,60,0,0.25)" stroke-width="1"/>
+                    <!-- Ánh sáng bánh -->
+                    <ellipse cx="102" cy="162" rx="8" ry="5" fill="rgba(255,255,255,0.22)"/>
+                    <!-- Chữ 月 nhỏ -->
+                    <text x="110" y="170" text-anchor="middle" font-size="9" font-family="serif" fill="rgba(80,40,0,0.55)">月</text>
+
+                    <!-- ── BÀN TAY NHỎ ── -->
+                    <ellipse cx="88" cy="162" rx="10" ry="7" fill="url(#rFur)"/>
+                    <ellipse cx="132" cy="162" rx="10" ry="7" fill="url(#rFur)"/>
+                    <!-- Ngón tay -->
+                    <circle cx="83" cy="158" r="3" fill="#ffccd8" opacity="0.55"/>
+                    <circle cx="90" cy="156" r="2.5" fill="#ffccd8" opacity="0.5"/>
+                    <circle cx="129" cy="158" r="3" fill="#ffccd8" opacity="0.55"/>
+                    <circle cx="136" cy="156" r="2.5" fill="#ffccd8" opacity="0.5"/>
+
+                    <!-- ── MẮT (to, tròn, anime) ── -->
+                    <!-- Tròng trắng -->
+                    <ellipse cx="94" cy="122" rx="14" ry="15" fill="white"/>
+                    <ellipse cx="128" cy="122" rx="14" ry="15" fill="white"/>
+                    <!-- Con ngươi -->
+                    <ellipse cx="96" cy="124" rx="10" ry="12" fill="url(#rPupil)"/>
+                    <ellipse cx="130" cy="124" rx="10" ry="12" fill="url(#rPupil)"/>
+                    <!-- Phản chiếu sáng lớn -->
+                    <g filter="url(#rGlow)">
+                        <circle cx="91" cy="118" r="4.5" fill="white"/>
+                        <circle cx="127" cy="118" r="4.5" fill="white"/>
+                    </g>
+                    <!-- Phản chiếu nhỏ -->
+                    <circle cx="100" cy="127" r="2" fill="rgba(255,255,255,0.7)"/>
+                    <circle cx="134" cy="127" r="2" fill="rgba(255,255,255,0.7)"/>
+                    <!-- Mi mắt trên (đường cong cute) -->
+                    <path d="M 82,114 Q 94,107 106,114" stroke="#c8a090" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <path d="M 116,114 Q 128,107 140,114" stroke="#c8a090" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── MÁ HỒNG (blush) ── -->
+                    <ellipse cx="76" cy="136" rx="13" ry="8" fill="#ff99b3" opacity="0" filter="url(#rBlush)"/>
+                    <ellipse cx="76" cy="136" rx="13" ry="8" fill="#ff99b3" opacity="0.28"/>
+                    <ellipse cx="146" cy="136" rx="13" ry="8" fill="#ff99b3" opacity="0.28"/>
+                    <!-- Chấm lấp lánh má -->
+                    <circle cx="70" cy="133" r="1.5" fill="rgba(255,200,220,0.7)"/>
+                    <circle cx="72" cy="130" r="1" fill="rgba(255,220,235,0.6)"/>
+                    <circle cx="150" cy="133" r="1.5" fill="rgba(255,200,220,0.7)"/>
+
+                    <!-- ── MŨI ── -->
+                    <ellipse cx="110" cy="134" rx="5" ry="3.5" fill="url(#rNose)"/>
+                    <ellipse cx="109" cy="133" rx="2" ry="1.5" fill="rgba(255,255,255,0.5)"/>
+
+                    <!-- ── MIỆNG (cười tươi ω) ── -->
+                    <path d="M 100,140 Q 105,146 110,140" stroke="#e07890" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <path d="M 110,140 Q 115,146 120,140" stroke="#e07890" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <!-- Răng cửa cute -->
+                    <rect x="105" y="140" width="5" height="5" rx="1.5" fill="white" opacity="0.8"/>
+                    <rect x="111" y="140" width="5" height="5" rx="1.5" fill="white" opacity="0.8"/>
+
+                    <!-- ── RÂU ── -->
+                    <line x1="65" y1="131" x2="84" y2="134" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="63" y1="138" x2="83" y2="138" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="65" y1="145" x2="84" y2="142" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="155" y1="131" x2="136" y2="134" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="157" y1="138" x2="137" y2="138" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="155" y1="145" x2="136" y2="142" stroke="rgba(200,170,155,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+
+                    <!-- ── TÚM LÔNG ĐỈNH ĐẦU ── -->
+                    <path d="M 100,88 Q 105,80 110,86 Q 114,79 118,86 Q 122,80 126,88" fill="url(#rFur)" stroke="rgba(230,210,200,0.3)" stroke-width="0.5"/>
+
+                    <!-- ── LẤP LÁNH XUNG QUANH ── -->
+                    <g opacity="0.7">
+                        <text x="44" y="108" font-size="9" fill="#ffd700">✦<animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.2s" repeatCount="indefinite"/></text>
+                        <text x="178" y="118" font-size="7" fill="#ffd700">✦<animate attributeName="opacity" values="0.5;0;0.5" dur="2.8s" repeatCount="indefinite"/></text>
+                        <text x="38" y="180" font-size="8" fill="#ffb347">✦<animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/></text>
+                        <circle cx="48" cy="145" r="2" fill="#ffd700"><animate attributeName="opacity" values="0.8;0.1;0.8" dur="1.9s" repeatCount="indefinite"/><animate attributeName="r" values="2;3;2" dur="1.9s" repeatCount="indefinite"/></circle>
+                        <circle cx="178" cy="165" r="1.8" fill="#ffb347"><animate attributeName="opacity" values="0.6;0;0.6" dur="2.4s" repeatCount="indefinite"/></circle>
+                    </g>
+                </g>
+            </svg>
+            <div class="rabbit-shadow"></div>
+        </div>
+    </div>
+
+    <!-- Particles -->
+    <canvas id="particleCanvas" class="layer"></canvas>
+
+    <!-- Lanterns -->
+    <div class="layer lantern-layer" id="lanternLayer">
+        <!-- Injected by JS -->
+    </div>
+
+    <!-- UI -->
+    <div class="layer ui-layer">
+        <header class="glass-header">
+            <div class="brand">
+                <div class="brand-icon">🌕</div>
+                <div class="brand-text">
+                    <h1>Trung Thu cùng Mỹ Hạnh</h1>
+                    <p>Chàng ấy develop</p>
+                </div>
+            </div>
+            <button id="bgmBtn" class="premium-btn">
+                <span class="icon">🎵</span>
+                <span class="text">Bật Nhạc</span>
+            </button>
+        </header>
+        <footer class="glass-footer">
+            <p>🏮 Chạm vào lồng đèn để nhận lời chúc — Lồng đèn đặc biệt 💖 sẽ mang bí mật! 🏮</p>
+        </footer>
+    </div>
+
+    <!-- Modal lời chúc -->
+    <div class="wish-modal" id="wishModal">
+        <div class="wm-card">
+            <button class="wm-close" id="wmClose">✕</button>
+            <div class="wm-img-wrap">
+                <img id="wmImg" src="" alt=""/>
+                <div class="wm-img-fade"></div>
+            </div>
+            <div class="wm-body">
+                <div class="wm-ornament">✦ ✦ ✦</div>
+                <p class="wm-text" id="wmText"></p>
+                <button class="wm-accept" id="wmAccept">🏮 Đón Nhận Lời Chúc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ HEART 3D SCREEN ══ -->
+    <div class="heart-screen" id="heartScreen">
+        <canvas id="heartCanvas"></canvas>
+
+        <!-- Chữ nổi lên từ dưới -->
+        <div class="heart-text-obj" id="heartTextObj">
+            <div class="ht-line ht-l1">💛 Chúc Mừng Tết Trung Thu 2026 💛</div>
+        </div>
+
+        <!-- Hint bấm -->
+        <div class="heart-hint" id="heartHint">
+            <span>💖 Chạm vào trái tim để mở bí mật 💖</span>
+        </div>
+    </div>
+
+    <!-- ══ LETTER SCREEN ══ -->
+    <div class="letter-screen" id="letterScreen">
+        <!-- Trái tim xẻ đôi -->
+        <div class="heart-halves" id="heartHalves">
+            <div class="hh-left" id="hhLeft">
+                <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <!-- Fur gradient -->
-                        <radialGradient id="furMain" cx="40%" cy="35%" r="65%">
-                            <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="60%" stop-color="#f8f4f0"/>
-                            <stop offset="100%" stop-color="#e8e0d8"/>
+                        <radialGradient id="hg1" cx="40%" cy="30%" r="70%">
+                            <stop offset="0%" stop-color="#ff6b9d"/>
+                            <stop offset="50%" stop-color="#e01050"/>
+                            <stop offset="100%" stop-color="#900030"/>
                         </radialGradient>
-                        <!-- Ear pink gradient -->
-                        <linearGradient id="earPink" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#ffc1cc"/>
-                            <stop offset="100%" stop-color="#ff8fa3"/>
-                        </linearGradient>
-                        <!-- Eye sparkle -->
-                        <radialGradient id="eyeGrad" cx="40%" cy="35%" r="55%">
-                            <stop offset="0%" stop-color="#4a3728"/>
-                            <stop offset="70%" stop-color="#1a0e08"/>
-                            <stop offset="100%" stop-color="#0d0604"/>
-                        </radialGradient>
-                        <!-- Mooncake gradient -->
-                        <radialGradient id="mooncakeGrad" cx="40%" cy="35%" r="60%">
-                            <stop offset="0%" stop-color="#f0c060"/>
-                            <stop offset="50%" stop-color="#d4a043"/>
-                            <stop offset="100%" stop-color="#b8860b"/>
-                        </radialGradient>
-                        <!-- Soft shadow filter -->
-                        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-                        </filter>
-                        <!-- Glow filter -->
-                        <filter id="blushGlow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="4" result="blur"/>
-                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <!-- Sparkle filter for eyes -->
-                        <filter id="sparkle">
-                            <feGaussianBlur stdDeviation="1.5" result="glow"/>
-                            <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
                     </defs>
-
-                    <g filter="url(#softShadow)">
-                        <!-- === LEFT EAR (tall, upright) === -->
-                        <ellipse cx="100" cy="55" rx="22" ry="72" fill="url(#furMain)" transform="rotate(-10, 100, 55)"/>
-                        <ellipse cx="100" cy="55" rx="13" ry="55" fill="url(#earPink)" opacity="0.7" transform="rotate(-10, 100, 55)"/>
-                        <!-- Ear inner highlight -->
-                        <ellipse cx="98" cy="40" rx="5" ry="25" fill="rgba(255,255,255,0.4)" transform="rotate(-10, 100, 55)"/>
-
-                        <!-- === RIGHT EAR (slightly tilted/floppy) === -->
-                        <ellipse cx="165" cy="60" rx="22" ry="68" fill="url(#furMain)" transform="rotate(18, 165, 60)"/>
-                        <ellipse cx="165" cy="60" rx="13" ry="52" fill="url(#earPink)" opacity="0.7" transform="rotate(18, 165, 60)"/>
-                        <ellipse cx="163" cy="48" rx="5" ry="23" fill="rgba(255,255,255,0.4)" transform="rotate(18, 165, 60)"/>
-
-                        <!-- === HEAD === -->
-                        <ellipse cx="130" cy="150" rx="58" ry="52" fill="url(#furMain)"/>
-                        <!-- Head highlight -->
-                        <ellipse cx="120" cy="135" rx="30" ry="25" fill="rgba(255,255,255,0.5)"/>
-
-                        <!-- === BODY === -->
-                        <ellipse cx="130" cy="240" rx="62" ry="65" fill="url(#furMain)"/>
-                        <!-- Belly highlight -->
-                        <ellipse cx="130" cy="235" rx="40" ry="45" fill="rgba(255,255,255,0.6)"/>
-
-                        <!-- === FLUFFY TAIL === -->
-                        <circle cx="68" cy="255" r="22" fill="url(#furMain)"/>
-                        <circle cx="68" cy="253" r="14" fill="rgba(255,255,255,0.6)"/>
-                        <!-- Tail fluff detail -->
-                        <circle cx="60" cy="248" r="6" fill="rgba(255,255,255,0.5)"/>
-                        <circle cx="75" cy="247" r="5" fill="rgba(255,255,255,0.4)"/>
-
-                        <!-- === FEET === -->
-                        <ellipse cx="105" cy="298" rx="25" ry="12" fill="url(#furMain)"/>
-                        <ellipse cx="160" cy="298" rx="25" ry="12" fill="url(#furMain)"/>
-                        <!-- Toe pads -->
-                        <ellipse cx="95" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-                        <ellipse cx="105" cy="294" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-                        <ellipse cx="115" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-                        <ellipse cx="150" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-                        <ellipse cx="160" cy="294" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-                        <ellipse cx="170" cy="296" rx="5" ry="4" fill="#ffc1cc" opacity="0.5"/>
-
-                        <!-- === ARMS (holding mooncake) === -->
-                        <!-- Left arm -->
-                        <path d="M 90,200 C 70,195 55,188 50,180 C 48,176 52,172 58,175 C 65,178 75,185 85,195 Z" fill="url(#furMain)"/>
-                        <!-- Right arm -->
-                        <path d="M 170,200 C 190,195 205,188 210,180 C 212,176 208,172 202,175 C 195,178 185,185 175,195 Z" fill="url(#furMain)"/>
-
-                        <!-- === MOONCAKE (held by rabbit) === -->
-                        <g>
-                            <ellipse cx="130" cy="192" rx="30" ry="18" fill="url(#mooncakeGrad)"/>
-                            <!-- Mooncake pattern -->
-                            <ellipse cx="130" cy="190" rx="18" ry="10" fill="none" stroke="rgba(139,69,19,0.35)" stroke-width="1.2"/>
-                            <circle cx="130" cy="189" r="6" fill="none" stroke="rgba(139,69,19,0.3)" stroke-width="1"/>
-                            <!-- Mooncake shine -->
-                            <ellipse cx="122" cy="186" rx="8" ry="5" fill="rgba(255,255,255,0.25)"/>
-                        </g>
-
-                        <!-- === LITTLE PAWS on mooncake === -->
-                        <ellipse cx="108" cy="185" rx="10" ry="8" fill="url(#furMain)"/>
-                        <ellipse cx="152" cy="185" rx="10" ry="8" fill="url(#furMain)"/>
-                        <!-- Paw pads -->
-                        <circle cx="105" cy="183" r="2.5" fill="#ffc1cc" opacity="0.6"/>
-                        <circle cx="111" cy="182" r="2" fill="#ffc1cc" opacity="0.5"/>
-                        <circle cx="149" cy="183" r="2.5" fill="#ffc1cc" opacity="0.6"/>
-                        <circle cx="155" cy="182" r="2" fill="#ffc1cc" opacity="0.5"/>
-
-                        <!-- === EYES (big, sparkly anime-style) === -->
-                        <!-- Left eye white -->
-                        <ellipse cx="112" cy="145" rx="14" ry="16" fill="white"/>
-                        <!-- Left eye iris -->
-                        <ellipse cx="114" cy="147" rx="10" ry="12" fill="url(#eyeGrad)"/>
-                        <!-- Left eye sparkles -->
-                        <g filter="url(#sparkle)">
-                            <circle cx="109" cy="141" r="4" fill="white"/>
-                            <circle cx="118" cy="149" r="2.2" fill="white"/>
-                            <circle cx="111" cy="153" r="1.5" fill="rgba(255,255,255,0.7)"/>
-                        </g>
-
-                        <!-- Right eye white -->
-                        <ellipse cx="152" cy="145" rx="14" ry="16" fill="white"/>
-                        <!-- Right eye iris -->
-                        <ellipse cx="154" cy="147" rx="10" ry="12" fill="url(#eyeGrad)"/>
-                        <!-- Right eye sparkles -->
-                        <g filter="url(#sparkle)">
-                            <circle cx="149" cy="141" r="4" fill="white"/>
-                            <circle cx="158" cy="149" r="2.2" fill="white"/>
-                            <circle cx="151" cy="153" r="1.5" fill="rgba(255,255,255,0.7)"/>
-                        </g>
-
-                        <!-- Eyebrow curves (subtle) -->
-                        <path d="M 100,130 Q 112,124 124,130" stroke="rgba(180,160,140,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 140,130 Q 152,124 164,130" stroke="rgba(180,160,140,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-                        <!-- === CHEEKS (rosy blush) === -->
-                        <g filter="url(#blushGlow)">
-                            <ellipse cx="92" cy="160" rx="14" ry="8" fill="#ff8fa3" opacity="0.35"/>
-                            <ellipse cx="172" cy="160" rx="14" ry="8" fill="#ff8fa3" opacity="0.35"/>
-                        </g>
-
-                        <!-- === NOSE === -->
-                        <ellipse cx="132" cy="157" rx="5" ry="3.5" fill="#ff8fa3"/>
-                        <!-- Nose highlight -->
-                        <ellipse cx="131" cy="156" rx="2" ry="1.5" fill="rgba(255,255,255,0.5)"/>
-
-                        <!-- === MOUTH (cute smile) === -->
-                        <path d="M 122,163 Q 127,170 132,163" stroke="#e0788a" stroke-width="2" fill="none" stroke-linecap="round"/>
-                        <path d="M 132,163 Q 137,170 142,163" stroke="#e0788a" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-                        <!-- === WHISKERS === -->
-                        <line x1="80" y1="153" x2="96" y2="157" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-                        <line x1="78" y1="162" x2="95" y2="162" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-                        <line x1="80" y1="170" x2="96" y2="167" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-                        <line x1="168" y1="157" x2="184" y2="153" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-                        <line x1="169" y1="162" x2="186" y2="162" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-                        <line x1="168" y1="167" x2="184" y2="170" stroke="rgba(180,160,140,0.35)" stroke-width="1" stroke-linecap="round"/>
-
-                        <!-- === FOREHEAD TUFT (fluffy fur) === -->
-                        <path d="M 115,105 Q 120,95 130,100 Q 135,92 142,100 Q 148,95 150,105" fill="url(#furMain)"/>
-                    </g>
-
-                    <!-- === FLOATING SPARKLES around rabbit === -->
-                    <g class="rabbit-sparkles">
-                        <circle cx="60" cy="130" r="2" fill="#ffd700" opacity="0.8">
-                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
-                            <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="210" cy="140" r="1.8" fill="#ffd700" opacity="0.6">
-                            <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite"/>
-                            <animate attributeName="r" values="1.8;2.8;1.8" dur="2.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="45" cy="200" r="1.5" fill="#ffb347" opacity="0.7">
-                            <animate attributeName="opacity" values="0.7;0.15;0.7" dur="3s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="220" cy="220" r="2" fill="#ffb347" opacity="0.5">
-                            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.8s" repeatCount="indefinite"/>
-                        </circle>
-                        <!-- Star sparkles -->
-                        <text x="50" y="170" font-size="10" fill="#ffd700" opacity="0.6">✦
-                            <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
-                        </text>
-                        <text x="215" y="180" font-size="8" fill="#ffd700" opacity="0.5">✦
-                            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite"/>
-                        </text>
-                    </g>
+                    <path d="M 100,160 C 60,130 0,100 0,55 C 0,20 30,0 55,0 C 75,0 90,10 100,25 L 100,160 Z" fill="url(#hg1)"/>
+                    <path d="M 100,25 C 90,10 75,0 55,0" stroke="rgba(255,150,180,0.4)" stroke-width="2" fill="none"/>
                 </svg>
-                <div class="rabbit-shadow"></div>
+            </div>
+            <div class="hh-right" id="hhRight">
+                <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="hg2" cx="60%" cy="30%" r="70%">
+                            <stop offset="0%" stop-color="#ff6b9d"/>
+                            <stop offset="50%" stop-color="#e01050"/>
+                            <stop offset="100%" stop-color="#900030"/>
+                        </radialGradient>
+                    </defs>
+                    <path d="M 100,160 C 140,130 200,100 200,55 C 200,20 170,0 145,0 C 125,0 110,10 100,25 L 100,160 Z" fill="url(#hg2)"/>
+                    <path d="M 100,25 C 110,10 125,0 145,0" stroke="rgba(255,150,180,0.4)" stroke-width="2" fill="none"/>
+                </svg>
             </div>
         </div>
 
-        <!-- LAYER 4: Foreground Particles -->
-        <canvas id="particleCanvas" class="layer"></canvas>
+        <!-- Ánh sáng hiện ra -->
+        <div class="letter-light" id="letterLight"></div>
 
-        <!-- LAYER 5: Lanterns (golden-orange only) -->
-        <div class="layer lantern-layer" id="lanternsContainer">
-            <!-- Lanterns injected by JS -->
-        </div>
+        <!-- Lá thư -->
+        <div class="letter-wrap" id="letterWrap">
+            <div class="letter-paper">
+                <!-- Đường kẻ giấy -->
+                <div class="paper-lines"></div>
 
-        <!-- LAYER 6: UI -->
-        <div class="layer ui-layer">
-            <header class="glass-header">
-                <div class="brand">
-                    <div class="brand-icon">🌕</div>
-                    <div class="brand-text">
-                        <h1>Trung Thu Viên Mãn</h1>
-                        <p>2026 Premium Edition</p>
+                <div class="letter-head">
+                    <div class="lh-moon">🌕</div>
+                    <h3 class="lh-title">Lá Thư Trung Thu</h3>
+                    <p class="lh-date">Rằm Tháng Tám • Bính Ngọ 2026</p>
+                </div>
+
+                <div class="letter-divider">❧</div>
+
+                <div class="letter-body-text">
+                    <p class="lb-salute">Gửi cho cô ấy,</p>
+                    <p>Đêm nay trăng tròn treo cao, không biết là em đang làm gì, ở đâu nhỉ????</p>
+                    <p>Trong lúc rảnh rỗi anh lại viết lên cái trang này để nói lên tâm trạng này. Cũng chẳng biết nói gì ngoài những câu từ giản đơn này đây.</p>
+                    <p>Chúc em có đêm trăng rằm vui tươi, hạnh phúc. Một người không giỏi giữ em lại!!!! Thật tệ ha. Anh không thích nhìn em buồn, lại càng chẳng thích trông em ấm ức khó chịu vì anh, nếu lúc đó có cơ hội làm lại anh nghĩ anh sẽ dịu dàng với em hơn, bình tĩnh hơn, chừng chạc hơn, lắng nghe em nhiều hơn nhưng mà giờ thì.... haizzz</p>
+                    <p>Chắc có lẽ anh nên im lặng thì tốt hơn. Nhưng giờ thì anh hối hận... em là người đầu tiên anh muốn níu kéo và giữ lại nhất, cô gái vừa xinh xắn lại còn vừa lỳ nữa. Tại sao tôi lại thích em đến như vậy nhỉ, thật là khó hiểu. Có lẽ trái tim này đã quá rung động vì em mất rồi. </p>
+                    <p class="lb-sign">Từng lời yêu thương đến emmmm,<br><em>🏮 Trung Thu 2026 🏮</em></p>
+                </div>
+
+                <!-- Con dấu sáp -->
+                <div class="letter-seal">
+                    <div class="seal-wax">
+                        <span>中秋</span>
                     </div>
                 </div>
-                <button id="bgmBtn" class="premium-btn">
-                    <span class="icon">🎵</span>
-                    <span class="text">Bật Nhạc</span>
-                </button>
-            </header>
 
-            <footer class="glass-footer">
-                <p>✨ Chạm vào lồng đèn để nhận lời chúc ✨</p>
-            </footer>
-        </div>
-
-        <!-- Wish Modal with image inside -->
-        <div class="modal-overlay" id="wishModal">
-            <div class="modal-container">
-                <div class="modal-card">
-                    <button class="close-btn" id="closeBtn">
-                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                    <!-- Image on top -->
-                    <div class="modal-image-wrapper" id="modalImageWrapper">
-                        <img id="modalImage" src="" alt="" class="modal-image" />
-                    </div>
-                    <div class="envelope-body">
-                        <div class="ornament-divider">
-                            <span>✦</span><span>✦</span><span>✦</span>
-                        </div>
-                        <div class="letter-content" id="modalMessage">
-                            Đang mở thư...
-                        </div>
-                        <button class="action-btn" id="acceptBtn">
-                            🏮 Đón Nhận Lời Chúc
-                        </button>
-                    </div>
-                </div>
+                <button class="letter-back-btn" id="letterBackBtn">🌕 Trở về</button>
             </div>
         </div>
-
     </div>
 
-    <script src="script.js"></script>
+</div><!-- /main-scene -->
+
+<script src="script.js"></script>
 </body>
 </html>
