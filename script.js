@@ -625,7 +625,7 @@ function openHeartScreen() {
         el.style.animationDuration = (3.5 + Math.random() * 3.5) + 's';
         heartScreen.appendChild(el);
         setTimeout(() => el.remove(), 8000);
-    }, 350);
+    }, 80);
 
     // Chữ nổi lên sau 1s (ẩn chữ cũ đi hoặc giữ nguyên, ta giữ nguyên cho phong phú)
     setTimeout(() => {

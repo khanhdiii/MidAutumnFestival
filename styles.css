@@ -117,7 +117,9 @@ body {
     display: flex; align-items: center; justify-content: center;
 }
 .mc-yolk-core {
-    font-size: 46px; z-index: 3; position: relative;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff8b0 0%, #ffc800 40%, #e0a000 100%);
+    z-index: 3; position: relative;
     animation: yolkPulse 3s infinite alternate ease-in-out;
     filter: drop-shadow(0 0 22px rgba(255,200,50,.9));
 }
@@ -663,7 +665,7 @@ body {
     bottom:-160px; left:50%;
     transform:translateX(-50%);
     z-index:3; text-align:center;
-    pointer-events:none; white-space:nowrap;
+    pointer-events:none; width:90%;
     opacity:0;
     transition:opacity .5s ease;
 }
@@ -885,3 +887,28 @@ body {
     transition:all .3s ease; position:relative; z-index:2;
 }
 .letter-back-btn:hover { transform:translateY(-3px); filter:brightness(1.12); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE (MOBILE)
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .letter-paper {
+        padding: 20px 20px 15px;
+        max-height: 80vh;
+        width: 95vw;
+        overflow-y: auto;
+    }
+    .paper-lines {
+        top: 75px;
+    }
+    .lh-title {
+        font-size: 1.5rem;
+    }
+    .letter-body-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    .ht-l1 { font-size: 1.5rem; }
+    .ht-l2 { font-size: 1.2rem; }
+    .ht-l3 { font-size: 1rem; }
+}
